@@ -56,6 +56,11 @@ function e2e_test() {
     make -C "${ROOTDIR}" e2e-test
 }
 
+function helm_test() {
+    sudo docker ps -a | grep spdkdev | awk '{print $1}'| xargs sudo docker rm -f
+    make -C "${ROOTDIR}" helm-test
+}
+
 function cleanup() {
     sudo docker rm -f "${SPDK_CONTAINER}" > /dev/null || :
     sudo "${ROOTDIR}/scripts/minikube.sh" clean || :
@@ -67,3 +72,4 @@ trap cleanup EXIT
 prepare_spdk
 unit_test
 e2e_test
+helm_test
