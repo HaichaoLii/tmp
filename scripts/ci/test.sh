@@ -51,7 +51,7 @@ function e2e_test() {
     sudo modprobe iscsi_tcp
     sudo modprobe nvme-tcp
     export KUBE_VERSION MINIKUBE_VERSION
-    sudo --preserve-env=KUBE_VERSION,MINIKUBE_VERSION "${ROOTDIR}/scripts/minikube.sh" up
+    sudo -E "${ROOTDIR}/scripts/minikube.sh" up
     export PATH="/var/lib/minikube/binaries/${KUBE_VERSION}:${PATH}"
     make -C "${ROOTDIR}" e2e-test
 }
